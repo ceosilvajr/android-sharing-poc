@@ -3,6 +3,7 @@ package com.ceosilvajr.datasender
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity() {
             )
             putSerializable("data", arrayString)
             putString("type", "final")
+            putString("order", Gson().toJson(OrderModel("It works!")))
         }
         val intent = Intent().apply {
             action = Intent.ACTION_SEND

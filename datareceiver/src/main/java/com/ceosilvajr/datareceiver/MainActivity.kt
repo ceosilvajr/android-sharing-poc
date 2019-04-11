@@ -3,6 +3,7 @@ package com.ceosilvajr.datareceiver
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import java.util.*
@@ -25,9 +26,10 @@ class MainActivity : AppCompatActivity() {
             bundle?.let {
                 val type = it.getString("type") ?: "Not found"
                 val data = it.getSerializable("data") as HashMap<*, *>
+                val model = Gson().fromJson(it.getString("order"), OrderModel::class.java)
                 val builder = StringBuilder(type)
                 builder.append(data.entries)
-                tv_data.text = builder.toString()
+                tv_data.text = model.toString().plus(builder.toString())
             }
         }
     }
